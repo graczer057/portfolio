@@ -2,7 +2,24 @@
 
 namespace App\Forms\adminPanel;
 
-class aboutEditType
-{
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\FormBuilderInterface;
 
+class aboutEditType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('desc', TextareaType::class, [
+                'label' => 'Opis: ',
+                'required' => false
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Edytuj opis',
+                'attr' => ['class' => 'save']
+            ])
+        ;
+    }
 }

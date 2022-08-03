@@ -1,0 +1,25 @@
+{% block flash_messages %}
+
+    {% for type, messages in app.session.flashbag.all() %}
+
+        {% for message in messages %}
+
+            <div id="alert" class="alert show alert-{{ type }}" role="alert">
+
+                <div class="flashC">
+                    <button id="cM" class="rollerOne">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                {{ message | raw }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,9 +1,13 @@
 <!DOCTYPE html>
+
 <html>
+
     <head>
-        <meta charset="UTF-8">
+
         <title>{% block title %}Bartlomiej Szyszkowski portfolio{% endblock %}</title>
-        <meta name="description" content="This page is a portfolio of Bartlomiej Szyszkowski.">
+
+        <meta charset="UTF-8">
+        <meta name="description" content="This page is a personal website of Bartlomiej Szyszkowski.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -14,11 +18,15 @@
         {% endblock %}
 
     </head>
+
     <body>
 
         {% block body %}
+
             <header>
+
                 <nav class="navbar">
+
                     <a href="{{ path('landingPage') }}" class="nav-branding">BSZ</a>
 
                     <ul class="nav-menu">
@@ -40,6 +48,7 @@
                     </ul>
 
                     <a class="ct" {% if app.request.get('_route') == 'landingPage' %} href="#con" {% else %} href="/#con" {% endif %}><button class="cta">Kontakt/CV</button></a>
+
                     <button class="roller">
                         <span></span>
                         <span></span>
@@ -47,17 +56,22 @@
                     </button>
 
                 </nav>
+
             </header>
 
             <main>{% block main %}{% endblock %}</main>
 
             <footer>
+
                 <p class="p3">Portfolio Bartłomieja Szyszkowskiego. Strona nie jest produktem komercyjnym, ma za zadanie pokazać aktualne osiągnięcia i umiejętności autora strony.</p>
+
                 <ul class="navLinks">
-                    <li><img src="images/g.png" class="icons" alt="github"></li>
-                    <li><img src="images/l.png" class="icons" alt="linkedin"></li>
+                    <li><a href="https://github.com/graczer057" target="_blank"><img src="images/g.png" class="icons" alt="github"></a></li>
+                    <li><a href="https://www.linkedin.com/in/bartlomiej-szyszkowski/" target="_blank"><img src="images/l.png" class="icons" alt="linkedin"></a></li>
                 </ul>
+
             </footer>
+
         {% endblock %}
 
         {% block javascripts %}
@@ -67,4 +81,5 @@
         {% endblock %}
 
     </body>
+
 </html>

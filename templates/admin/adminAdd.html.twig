@@ -1,0 +1,59 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block main %}
+
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
+
+    <div class="porDel">
+
+        <div class="title">
+            <h2>Dodaj nowy projekt</h2>
+        </div>
+
+        <div class="titleH">
+            {{ form_start(proForm) }}
+            {{ form_widget(proForm) }}
+            {{ form_end(proForm) }}
+        </div>
+
+        <div class="title">
+            <h2>Dodaj nowe zdjęcia projektu</h2>
+        </div>
+
+        <div class="titleH">
+            {{ form_start(picForm) }}
+            {{ form_widget(picForm) }}
+            {{ form_end(picForm) }}
+        </div>
+
+    </div>
+
+    <div class="skillsDel">
+
+        <div class="title">
+            <h2>Dodaj nową umiejętność</h2>
+        </div>
+
+        <div class="titleH">
+            {{ form_start(skillForm) }}
+            {{ form_widget(skillForm) }}
+            {{ form_end(skillForm) }}
+        </div>
+
+    </div>
+
+    <div class="expDel">
+
+        <div class="title">
+            <h2>Dodaj nowe doświadczenie</h2>
+        </div>
+
+        <div class="titleH">
+            {{ form_start(expForm) }}
+            {{ form_widget(expForm) }}
+            {{ form_end(expForm) }}
+        </div>
+
+    </div>
+
+{% endblock %}

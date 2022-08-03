@@ -1,0 +1,167 @@
+{% extends 'landing/base.html.twig' %}
+
+{% block main %}
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
+
+    <section id="portfolio">
+
+        <div class="mainPortfolio">
+
+            <div class="title">
+                <h2>portfolio</h2>
+            </div>
+
+            <div class="images">
+
+                {% set index1 = 1 %}
+                {% for pro in pros %}
+
+                    <div class="portfolio" id="open{{ pro.id }}">
+
+                        <div class="gallery">
+
+                            {% for pic in pics %}
+
+                                {% if pro.id == pic.portfolio.id and pic.pictureOrder == 1 %}
+
+                                    {% set index = 1 %}
+
+                                        <a>
+                                            <img src="images/{{ pic.picture }}" width="600" height="400">
+                                        </a>
+
+                                    {% set index = index + 1 %}
+
+                                {% endif %}
+
+                            {% endfor%}
+
+                            <div class="iDesc">
+                                {{ pro.mainTitle }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+    {% for pro in pros %}
+
+        <div class="modal-container" id="modal-container{{ pro.id }}">
+
+            <div class="modal">
+
+                <div class="mI">
+
+                    {% set index = 1 %}
+                    {% for pic in pics %}
+
+                        {% if pro.id == pic.portfolio.id %}
+
+                                {% if pro.id == pic.portfolio.id and pic.pictureOrder == 1 %}
+
+                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery{{ pro.id }}"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgP"></a>
+
+                                {% elseif pic.pictureOrder != 1 %}
+
+                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery{{ pro.id }}"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgS"></a>
+                                    {% set index = index + 1 %}
+
+                                {% endif %}
+
+                        {% endif %}
+
+                    {% endfor%}
+
+                </div>
+
+                <div class="mL">
+                    <img src="images/earth.png" alt="link do strony" class="icon">{% if pro.worldLink is not null %} <a href="https://{{ pro.worldLink }}"><p class="link1">{{ pro.worldLink }}</p></a> {% else %} <a><p class="link1"> Strona nie została wystawiona</p></a> {% endif %}
+                    <img src="images/gh.png" alt="link do repozytorium" class="icon"><a href="{{ pro.githubLink }}"><p class="link2">{{ pro.githubLink }}</p></a>
+                </div>
+
+                <div class="mC">
+
+                    <button id="close{{ pro.id }}" class="rollerOne">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                </div>
+
+                <div class="mD">
+                    <h3>Opis projektu:</h3>
+                    <p>{{ pro.description }}</p>
+                </div>
+
+                <div class="mS">
+                    <h4>Stack technologiczny: {{ pro.stack }}</h4>
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+    <div class="clearfix"></div>
+
+    <script>
+        /* Creating variable containing body selector from this html file to easily switching overflow on page */
+        const body = document.querySelector("body");
+
+        /* Creating variable to check proper order */
+        let count = 0;
+
+        /* For loop responsible for adding event listeners to open and close modals containing project info for each panel */
+        for(let i = 1; i <= 100; i++){
+
+
+            /* Variables containing id's of elements with id + id of the project */
+            let o = document.getElementById("open" + i);
+            let modalContainer = document.getElementById("modal-container" + i);
+            let c = document.getElementById("close" + i);
+
+            /* If statement to check that are variables existing*/
+            if(o != null){
+                /* Incrementing variable to use it in for bellow */
+                count++;
+            }
+
+            /* This if recreate id's and executing add event listeners */
+            if(modalContainer != null){
+                o.removeAttribute('id');
+                o.setAttribute("id", "open" + count);
+
+                modalContainer.removeAttribute('id');
+                modalContainer.setAttribute("id", "modal-container" + count);
+
+                c.removeAttribute('id');
+                c.setAttribute("id", "close" + count);
+
+                /* Event on click to open a modal with project and hiding an overflow */
+                o.addEventListener('click', () => {
+                    modalContainer.classList.toggle('show');
+
+                    body.style.overflow = 'hidden';
+                })
+
+                /*Event on click to close a modal with project and bringing back overflow to visible */
+                c.addEventListener('click', () => {
+                    modalContainer.classList.remove('show');
+
+                    body.style.overflow = 'visible';
+                })
+            }
+
+        }
+    </script>
+{% endblock %}

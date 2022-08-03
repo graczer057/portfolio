@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>{% block title %}Panel administratorski - Portfolio BSZ{% endblock %}</title>
+
+        <meta charset="UTF-8">
+        <meta name="description" content="This page is a portfolio of Bartlomiej Szyszkowski and his projects.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        {% block stylesheets %}
+            <link rel="icon" href="{{ asset('images/icon.png') }}">
+            <link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/lightbox.min.css') }}">
+        {% endblock %}
+
+    </head>
+
+    <body>
+
+        {% block body %}
+
+            <header>
+
+                <nav class="navbar">
+
+                    <a href="{{ path('adminPanel') }}" class="nav-branding"><h1>Portfolio - BSZ</h1></a>
+
+                    <a class="nav-brand"><h1>Admin Panel</h1></a>
+
+                </nav>
+
+            </header>
+
+            <div>
+
+                <div class="list">
+
+                    <div class="listing">
+
+                        <ul>
+                            <a href="{{ path('landingPage') }}"><li style="margin-bottom: 10px;">Strona główna - dla oglądających</li></a>
+                            <a href="{{ path('adminPanel') }}"><li style="margin-bottom: 10px;">Strona główna - panel administratorski</li></a>
+                            <a href="{{ path('adminAdd') }}"><li style="margin-bottom: 10px;">Dodaj</li></a>
+                            <a href="{{ path('adminEdit') }}"><li style="margin-bottom: 10px;">Edycja</li></a>
+                            <a href="{{ path('adminDelete') }}"><li style="margin-bottom: 10px;">Usuń</li></a>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <main>{% block main %}{% endblock %}</main>
+
+            </div>
+
+        {% endblock %}
+
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/lightbox-plus-jquery.min.js') }}"></script>
+            <!-- Lightbox created by Lokesh Dhakar.  https://lokeshdhakar.com/projects/lightbox2/ Lightbox2 is licensed under The MIT license 100% free.-->
+        {% endblock %}
+
+    </body>
+
+</html>

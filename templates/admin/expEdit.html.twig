@@ -1,0 +1,17 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block main %}
+
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
+
+    <div class="title">
+        <h2>Edytuj doświadczenie</h2>
+    </div>
+
+    <div class="titleH">
+        {{ form_start(expForm) }}
+        {{ form_widget(expForm) }}
+        {{ form_end(expForm) }}
+    </div>
+
+{% endblock %}

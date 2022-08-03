@@ -1,14 +1,160 @@
 {% extends 'admin/adminBase.html.twig' %}
 
 {% block main %}
+
     {% include 'messages/flashMessagesTemplate.html.twig' %}
+
     <div class="porDel">
-        <p>sth</p>
+
+        <div class="titleH">
+            <h2>Usuń projekt i/lub zdjęcia</h2>
+        </div>
+
+        {% set index = 1 %}
+        {% for pro in pros %}
+
+            <div class="skill">
+
+                <div class="data">
+                    <p><strong>Id: </strong> {{ pro.id }}</p>
+                    <p><strong>Tytuł: </strong> {{ pro.mainTitle }}</p>
+                    <p><strong>Link do strony: </strong> {{ pro.worldLink }}</p>
+                    <p><strong>Link do githuba: </strong> {{ pro.githubLink }}</p>
+                    <p><strong>Opis: </strong> {{ pro.description }}</p>
+                    <p><strong>Stack: </strong> {{ pro.stack }}</p>
+                </div>
+
+                <div class="porDelBut">
+                    <a href="{{ path('proDelete', {'proId': pro.id}) }}"><img src="images/close.png"></a>
+                </div>
+
+                <div class="drpBut">
+                    <a id="dropdownButton{{ pro.id }}"><img src="images/close.png"></a>
+                </div>
+
+            </div>
+
+            <div id="dropdown{{ pro.id }}" class="dropdownContent">
+
+                {% set index = 1 %}
+                {% for pic in pics %}
+
+                    {% if pro.id == pic.portfolio.id %}
+
+                        <div class="picture">
+
+                            <div class="data">
+                                <img src="images/{{ pic.picture }}" height="200" width="400">
+                            </div>
+
+                            <div class="porDelBut">
+                                <a href="{{ path('picDelete', {'picId': pic.id}) }}"><img src="images/close.png"></a>
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+                    {% set index = index + 1 %}
+
+                {% endfor %}
+
+                {% set index = index + 1 %}
+
+            </div>
+
+        {% endfor %}
+
     </div>
+
+    <script>
+        /* Creating variable that counts existing elements with id */
+        let count = 0;
+
+        for(let i = 1; i <= 100; i++){
+
+            /* Creating variables with id's */
+            let button = document.getElementById("dropdownButton" + i);
+            let dropdown = document.getElementById("dropdown" + i);
+
+            /* Variable counting existing elements */
+            if(button){
+                count++;
+            }
+
+            /* If element exist, then recreating id of element and adding event listener */
+            if(dropdown){
+                button.removeAttribute('id');
+                button. setAttribute("id", "dropdownButton" + count);
+
+                dropdown.removeAttribute('id');
+                dropdown.setAttribute("id", "dropdown" + count);
+
+                button.addEventListener('click', () => {
+                    dropdown.classList.toggle("show");
+                })
+            }
+
+        }
+    </script>
+
     <div class="skillsDel">
-        <p>sth</p>
+
+        <div class="titleH">
+            <h2>Usuń umiejętność</h2>
+        </div>
+
+        {% set index = 1 %}
+        {% for skill in skills %}
+
+            <div class="skill">
+
+                <div class="data">
+                    <p><strong>Id: </strong> {{ skill.id }}</p>
+                    <p><strong>Nazwa: </strong> {{ skill.name }}</p>
+                    <p><strong>Wartość procentowa: </strong> {{ skill.percentage }}%</p>
+                </div>
+
+                <div class="delBut">
+                    <a href="{{ path('skillDelete', {'skillId': skill.id}) }}"><img src="images/close.png"></a>
+                </div>
+
+            </div>
+
+            {% set index = index + 1 %}
+
+        {% endfor %}
+
     </div>
+
     <div class="expDel">
-        <p>sth</p>
+
+        <div class="titleH">
+            <h2>Usuń doświadczenie</h2>
+        </div>
+
+        {% set index = 1 %}
+        {% for exp in exps %}
+
+            <div class="skill">
+
+                <div class="data">
+                    <p><strong>Id: </strong> {{ exp.id }}</p>
+                    <p><strong>Tytuł: </strong> {{ exp.title }}</p>
+                    <p><strong>Opis: </strong> {{ exp.description }}</p>
+                    <p><strong>Data: </strong> {{ exp.date|date('d-m-Y') }}</p>
+                </div>
+
+                <div class="delBut">
+                    <a href="{{ path('expDelete', {'expId': exp.id}) }}"><img src="images/close.png"></a>
+                </div>
+
+            </div>
+
+            {% set index = index + 1 %}
+
+        {% endfor %}
+
     </div>
+
 {% endblock %}

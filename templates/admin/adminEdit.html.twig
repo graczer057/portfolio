@@ -1,0 +1,184 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block main %}
+
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
+
+    <div class="mainEdit">
+
+        <div class="titleH">
+            <h2>Edytuj maina</h2>
+        </div>
+
+        {% set index = 1 %}
+        {% for main in mains %}
+
+            <div class="skill">
+
+                <div class="data">
+
+                    <p><strong>Id: </strong> {{ main.id }}</p>
+                    <p><strong>Nazwa: </strong> {{ main.name }}</p>
+                    <p><strong>Tytuł: </strong> {{ main.title }}</p>
+
+                    <div class="data">
+                        <img src="images/{{ main.picture }}" height="250" width="250">
+                    </div>
+
+                </div>
+
+                <div class="delBut">
+                    <a href="{{ path('mainEdit', {'id': main.id}) }}"><img src="images/close.png"></a>
+                </div>
+
+            </div>
+
+            {% set index = index + 1 %}
+
+        {% endfor %}
+
+    </div>
+
+    <div class="aboutEdit">
+
+        <div class="titleH">
+            <h2>Edytuj opis</h2>
+
+        </div>
+
+        {% set index = 1 %}
+        {% for about in abouts %}
+
+            <div class="skill">
+
+                <div class="data">
+
+                    <p><strong>Id: </strong> {{ about.id }}</p>
+                    <p><strong>Opis: </strong> {{ about.description }}</p>
+
+                </div>
+
+                <div class="delBut">
+                    <a href="{{ path('aboutEdit', {'id': about.id}) }}"><img src="images/close.png"></a>
+                </div>
+
+            </div>
+
+            {% set index = index + 1 %}
+
+        {% endfor %}
+
+    </div>
+
+    <div class="skillsEdit">
+
+        <div class="titleH">
+            <h2>Edytuj umiejętności</h2>
+        </div>
+
+        {% set index = 1 %}
+        {% for skill in skills %}
+
+            <div class="skill">
+
+                <div class="data">
+                    <p><strong>Id: </strong> {{ skill.id }}</p>
+                    <p><strong>Kategoria: </strong> {% if skill.category == 1 %}Miękkie{% else %}Twarde{% endif %}</p>
+                    <p><strong>Nazwa: </strong> {{ skill.name }}</p>
+                    <p><strong>Wartość procentowa: </strong> {{ skill.percentage }}%</p>
+                </div>
+
+                <div class="delBut">
+                    <a href="{{ path('skillEdit', {'id': skill.id}) }}"><img src="images/close.png"></a>
+                </div>
+
+            </div>
+
+            {% set index = index + 1 %}
+
+        {% endfor %}
+
+    </div>
+
+    <div class="porEdit">
+
+        <div class="titleH">
+            <h2>Edytuj projekty</h2>
+        </div>
+
+        {% set index = 1 %}
+        {% for por in pors %}
+
+            <div class="skill">
+
+                <div class="data">
+                    <p><strong>Id: </strong> {{ por.id }}</p>
+                    <p><strong>Tytuł: </strong> {{ por.mainTitle }}</p>
+                    <p><strong>Link do strony: </strong> {{ por.worldLink }}</p>
+                    <p><strong>Link do githuba: </strong> {{ por.githubLink }}</p>
+                    <p><strong>Opis: </strong> {{ por.description }}</p>
+                    <p><strong>Stack: </strong> {{ por.stack }}</p>
+                </div>
+
+                <div class="porDelBut">
+                    <a href="{{ path('porEdit', {'id': por.id}) }}"><img src="images/close.png"></a>
+                </div>
+
+            </div>
+
+            {% set index = 1 %}
+            {% for pic in pics %}
+
+                {% if por.id == pic.portfolio.id %}
+
+                    <div>
+
+                        <div class="data">
+                            <img {% if pic.pictureOrder == 1 %}style="border: 3px solid yellow"{% endif%} src="images/{{ pic.picture }}" height="200" width="400">
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+                {% set index = index + 1 %}
+
+            {% endfor %}
+
+            {% set index = index + 1 %}
+
+        {% endfor %}
+
+    </div>
+
+    <div class="expEdit">
+
+        <div class="titleH">
+            <h2>Edytuj doświadczenie</h2>
+        </div>
+
+        {% set index = 1 %}
+        {% for exp in exps %}
+
+            <div class="skill">
+
+                <div class="data">
+                    <p><strong>Id: </strong> {{ exp.id }}</p>
+                    <p><strong>Tytuł: </strong> {{ exp.title }}</p>
+                    <p><strong>Opis: </strong> {{ exp.description }}</p>
+                    <p><strong>Data: </strong> {{ exp.date|date('d-M-Y') }}</p>
+                </div>
+
+                <div class="delBut">
+                    <a href="{{ path('expEdit', {'id': exp.id}) }}"><img src="images/close.png"></a>
+                </div>
+
+            </div>
+
+            {% set index = index + 1 %}
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

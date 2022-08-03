@@ -1,0 +1,17 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block main %}
+
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
+
+    <div class="title">
+        <h2>Edytuj projekt</h2>
+    </div>
+
+    <div class="titleH">
+        {{ form_start(porForm) }}
+        {{ form_widget(porForm) }}
+        {{ form_end(porForm) }}
+    </div>
+
+{% endblock %}

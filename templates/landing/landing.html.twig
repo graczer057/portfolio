@@ -1,0 +1,451 @@
+{% extends 'landing/base.html.twig' %}
+
+{% block main %}
+
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
+
+    <section id="main">
+
+        {% set index = 1 %}
+        {% for main in mains %}
+
+            <div class="main">
+
+                <div class="imageTitle">
+                    <img src="images/{{ main.picture }}" alt="Bartłomiej Szyszkowski - zdjęcie" class="me">
+                </div>
+
+                <div class="titleH">
+                    <h1>{{ main.name }}</h1>
+                    <hr class="rounded">
+                    <h2>{{ main.title }}</h2>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </section>
+
+    <section id="portfolio">
+
+        <div class="main reveal">
+
+            <div class="title">
+                <h2>portfolio</h2>
+            </div>
+
+            <div class="images">
+
+                {% set index1 = 1 %}
+                {% for pro in pros %}
+
+                    {% if index1 <= 4 %}
+
+                        <div class="portfolio" id="open{{ pro.id }}">
+
+                            <div class="gallery">
+
+                                {% for pic in pics %}
+
+                                    {% if pro.id == pic.portfolio.id and pic.pictureOrder == 1 %}
+
+                                        {% set index = 1 %}
+                                        <a>
+                                            <img src="images/{{ pic.picture }}" width="600" height="400" alt="Zdjęcie projektu">
+                                        </a>
+                                        {% set index = index + 1 %}
+
+                                    {% endif %}
+
+                                {% endfor%}
+
+                                <div class="iDesc">
+                                    {{ pro.mainTitle }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {% set index1 = index1 + 1 %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+            <div class="more">
+                <a href="{{ path('portfolio') }}" class="moreB" >
+                    Zobacz więcęj
+                </a>
+            </div>
+
+        </div>
+
+        {% set index2 = 1 %}
+        {% for pro in pros %}
+
+            {% if index2 <= 4 %}
+
+                <div class="modal-container" id="modal-container{{ pro.id }}">
+
+                <div class="modal">
+
+                    <div class="mI">
+
+                        {% set index = 1 %}
+                        {% for pic in pics %}
+
+                            {% if pro.id == pic.portfolio.id%}
+
+                                {% if pic.pictureOrder == 1 %}
+                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery1"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgP"></a>
+                                {% else %}
+                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery2"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgS"></a>
+                                {% endif %}
+
+                                {% set index = index + 1 %}
+
+                            {% endif %}
+
+                        {% endfor%}
+
+                        {% set index2 = index2 + 1 %}
+
+                    </div>
+
+                    <div class="mL">
+                        <img src="images/earth.png" alt="link do strony" class="icon">{% if pro.worldLink is not null %} <a href="https://{{ pro.worldLink }}"><p class="link1">{{ pro.worldLink }}</p></a> {% else %} <a><p class="link1"> Strona nie została wystawiona</p></a> {% endif %}
+                        <img src="images/gh.png" alt="link do repozytorium" class="icon"><a href="https://{{ pro.githubLink }}"><p class="link2">{{ pro.githubLink }}</p></a>
+                    </div>
+
+                    <div class="mC">
+                        <button id="close{{ pro.id }}" class="rollerOne">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+
+                    <div class="mD">
+                        <h3>Opis projektu:</h3>
+                        <p>{{ pro.description }}</p>
+                    </div>
+
+                    <div class="mS">
+                        <h4>Stack technologiczny: {{ pro.stack }}</h4>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+        <div class="clearfix"></div>
+
+        <script>
+            /* Creating variable containing body selector from this html file to easily switching overflow on page */
+            const body = document.querySelector("body");
+
+            /* Creating variable to check proper order */
+            let count = 0;
+
+            /* For loop responsible for adding event listeners to open and close modals containing project info for each panel */
+            for(let i = 1; i <= 100; i++){
+
+
+                /* Variables containing id's of elements with id + id of the project */
+                let o = document.getElementById("open" + i);
+                let modalContainer = document.getElementById("modal-container" + i);
+                let c = document.getElementById("close" + i);
+
+                /* If statement to check that are variables existing*/
+                if(o != null){
+                    /* Incrementing variable to use it in for bellow */
+                    count++;
+                }
+
+                if(o != null){
+                    o.removeAttribute('id');
+                    o.setAttribute("id", "open" + count);
+
+                    modalContainer.removeAttribute('id');
+                    modalContainer.setAttribute("id", "modal-container" + count);
+
+                    c.removeAttribute('id');
+                    c.setAttribute("id", "close" + count);
+
+                    /* Event on click to open a modal with project and hiding an overflow */
+                    o.addEventListener('click', () => {
+                        modalContainer.classList.toggle('show');
+
+                        body.style.overflow = 'hidden';
+                    })
+
+                    /*Event on click to close a modal with project and bringing back overflow to visible */
+                    c.addEventListener('click', () => {
+                        modalContainer.classList.remove('show');
+
+                        body.style.overflow = 'visible';
+                    })
+                }
+
+            }
+        </script>
+
+    </section>
+
+    <section id="about">
+
+        {% set index = 1 %}
+        {% for about in abouts %}
+
+            <div class="main reveal">
+
+                <div class="title">
+                    <h2>o mnie</h2>
+                </div>
+
+                <div class="titleH">
+                    <p>{{ about.description }}</p>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </section>
+
+    <section id="skills">
+
+        <div class="main reveal">
+
+            <div class="title">
+                <h2>Umiejętności</h2>
+            </div>
+
+            <div class="skills">
+
+                {% set index = 1 %}
+                {% for skill in skills%}
+
+                    {% if skill.percentage >= 50 and index <= 5 and skill.category == 2 %}
+
+                        <div class="bar">
+
+                            <div class="info">
+                                <span>{{ skill.name }}</span>
+                            </div>
+
+                            <div class="progress _{{ skill.percentage }}">
+                                <span  class="sSpan" style="width: {{ skill.percentage }}%;"></span>
+                            </div>
+
+                        </div>
+
+                        {% set index = index + 1 %}
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+            <div class="more">
+                <a href="{{ path('skills') }}" class="moreB">
+                    Zobacz więcęj
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="exp">
+
+        <div class="main reveal">
+
+            <div class="title">
+                <h2>Oś czasu</h2>
+            </div>
+
+            <div class="timeline">
+
+                <div class="expTitle">
+                    <h2>Doświadczenie</h2>
+                </div>
+
+                {% if exp1 is null %}
+
+                    <div class="date">
+                        <h4>Niestety nie posiadam nic do zaprezentowania</h4>
+                    </div>
+
+                {% else %}
+
+                    {% set index = 1 %}
+                    {% for exp in exp1 %}
+
+                        <div class="container left">
+
+                            <div class="date">
+                                {{ exp.date|date('d M Y') }}
+                            </div>
+
+                            <i class="icon fa fa-running"></i>
+
+                            <div class="content">
+                                <h2>{{ exp.title }}</h2>
+                                <p>{{ exp.description }}</p>
+                            </div>
+
+                        </div>
+
+                        {% set index = index + 1 %}
+
+                    {% endfor %}
+
+                {% endif %}
+
+                <div class="date">
+                    <h2>Wykształcenie</h2>
+                </div>
+
+                {% if exp2 is null %}
+
+                    <div class="date">
+                        <h4>Niestety nie posiadam nic do zaprezentowania</h4>
+                    </div>
+
+                {% else %}
+
+                    {% set index = 1 %}
+                    {% for exp in exp2 %}
+
+                        <div class="container right">
+
+                            <div class="date">
+                                {{ exp.date|date('d M Y') }}
+                            </div>
+
+                            <i class="icon fa fa-running"></i>
+
+                            <div class="content">
+                                <h2>{{ exp.title }}</h2>
+                                <p>{{ exp.description }}</p>
+                            </div>
+
+                        </div>
+
+                        {% set index = index + 1 %}
+
+                    {% endfor %}
+
+                {% endif %}
+
+                <div class="date">
+                    <h2>Certyfikaty</h2>
+                </div>
+
+                {% if exp3 is null %}
+
+                    <div class="date">
+                        <h4>Niestety nie posiadam nic do zaprezentowania</h4>
+                    </div>
+
+                {% else %}
+
+                    {% set index = 1 %}
+                    {% for exp in exp3 %}
+
+                        <div class="container left">
+
+                            <div class="date">
+                                {{ exp.date|date('d M Y') }}
+                            </div>
+
+                            <i class="icon fa fa-running"></i>
+
+                            <div class="content">
+                                <h2>{{ exp.title }}</h2>
+                                <p>{{ exp.description }}</p>
+                            </div>
+
+                        </div>
+
+                        {% set index = index + 1 %}
+
+                    {% endfor %}
+
+                {% endif %}
+
+                <div class="date">
+                    <h2>Projekty</h2>
+                </div>
+
+                {% if exp4 is null %}
+
+                    <div class="date">
+                        <h4>Niestety nie posiadam nic do zaprezentowania</h4>
+                    </div>
+
+                {% else %}
+
+                    {% set index = 1 %}
+                    {% for exp in exp4 %}
+
+                        <div class="container right">
+
+                            <div class="date">
+                                {{ exp.date|date('d M Y') }}
+                            </div>
+
+                            <i class="icon fa fa-running"></i>
+
+                            <div class="content">
+                                <h2>{{ exp.title }}</h2>
+                                <p>{{ exp.description }}</p>
+                            </div>
+
+                        </div>
+
+                        {% set index = index + 1 %}
+
+                    {% endfor %}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="con">
+
+        <div class="main reveal">
+
+            <div class="title">
+                <h2>Kontakt</h2>
+            </div>
+
+            <div class="formDesc">
+                <p>W razie propozycji pracy lub zleceń, proszę o skorzystanie z formularza kontaktowego. Jeśli strona działa nie poprawnie lub pojawiają się jakieś błedy, również proszę o kontakt ;)</p><br>
+            </div>
+
+            <div class="form">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

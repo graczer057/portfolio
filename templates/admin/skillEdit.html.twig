@@ -1,0 +1,17 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block main %}
+
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
+
+    <div class="title">
+        <h2>Edytuj umiejętność</h2>
+    </div>
+
+    <div class="titleH">
+        {{ form_start(skillForm) }}
+        {{ form_widget(skillForm) }}
+        {{ form_end(skillForm) }}
+    </div>
+
+{% endblock %}

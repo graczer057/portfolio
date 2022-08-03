@@ -1,0 +1,36 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block main %}
+
+    <div class="divTitle">
+        <h1>Witaj Administratorze</h1>
+    </div>
+
+    <div class="divRest">
+
+        <table id="emails">
+
+            <tr>
+                <th>ID</th>
+                <th>TEMAT WIADOMOŚCI</th>
+                <th>DATA WYSŁANIA</th>
+            </tr>
+
+            {% set index = 1 %}
+            {% for contact in contacts %}
+
+                <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.subject }}</td>
+                    <td>{{ contact.date|date('H:i d-m-Y') }}</td>
+                </tr>
+
+                {% set index = index + 1 %}
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+{% endblock %}

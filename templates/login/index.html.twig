@@ -1,20 +1,35 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/adminBase.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}Panel Administratorski - portfolio BSZ - login{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/graczer057/Documents/portfolio/src/Controller/LoginController.php'|file_link(0) }}">src/Controller/LoginController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/graczer057/Documents/portfolio/templates/login/index.html.twig'|file_link(0) }}">templates/login/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="loginTitle">
+        <h1> Żeby skorzystać z panelu administratora, zaloguj się </h1>
+    </div>
+
+    <div class="login">
+
+        <form action="{{ path('app_login') }}" method="post">
+
+            <label for="username">Adres email:</label><br>
+            <input type="text" id="username" name="_username" value="{{ last_username }}"/><br>
+
+            <label for="password">Hasło:</label><br>
+            <input type="password" id="password" name="_password"/><br>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_target_path" value="/admin"/>
+
+            <br><button type="submit">login</button>
+
+        </form>
+
+    </div>
+
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block main %}
+
+    {% include 'messages/flashMessagesTemplate.html.twig' %}
+
+    <div class="title">
+        <h2>Edytuj informacje z głównej strony</h2>
+    </div>
+
+    <div class="titleH">
+        {{ form_start(mainForm) }}
+        {{ form_widget(mainForm) }}
+        {{ form_end(mainForm) }}
+    </div>
+
+{% endblock %}
