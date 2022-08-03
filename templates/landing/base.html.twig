@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Bartlomiej Szyszkowski portfolio{% endblock %}</title>
+        <meta name="description" content="This page is a portfolio of Bartlomiej Szyszkowski.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        {% block stylesheets %}
+            <link href="images/icon.png" rel="icon">
+            <link href="css/main.css" rel="stylesheet" type="text/css">
+            <link href="css/lightbox.min.css" rel="stylesheet" type="text/css">
+        {% endblock %}
+
+    </head>
+    <body>
+
+        {% block body %}
+            <header>
+                <nav class="navbar">
+                    <a href="{{ path('landingPage') }}" class="nav-branding">BSZ</a>
+
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="{{ path('landingPage') }}" class="nav-link">Strona główna</a>
+                        </li>
+                        <li class="nav-item">
+                            <a {% if app.request.get('_route') == 'landingPage' %} href="#portfolio" {% else %} href="/#portfolio" {% endif %} class="nav-link">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a {% if app.request.get('_route') == 'landingPage' %} href="#about" {% else %} href="/#about" {% endif%} class="nav-link">O mnie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a {% if app.request.get('_route') == 'landingPage' %} href="#skills" {% else %} href="/#skills" {% endif %} class="nav-link">Umiejętności</a>
+                        </li>
+                        <li class="nav-item">
+                            <a {% if app.request.get('_route') == 'landingPage' %} href="#exp" {% else %} href="/#exp" {% endif %} class="nav-link">Doświadczenie</a>
+                        </li>
+                    </ul>
+
+                    <a class="ct" {% if app.request.get('_route') == 'landingPage' %} href="#con" {% else %} href="/#con" {% endif %}><button class="cta">Kontakt/CV</button></a>
+                    <button class="roller">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                </nav>
+            </header>
+
+            <main>{% block main %}{% endblock %}</main>
+
+            <footer>
+                <p class="p3">Portfolio Bartłomieja Szyszkowskiego. Strona nie jest produktem komercyjnym, ma za zadanie pokazać aktualne osiągnięcia i umiejętności autora strony.</p>
+                <ul class="navLinks">
+                    <li><img src="images/g.png" class="icons" alt="github"></li>
+                    <li><img src="images/l.png" class="icons" alt="linkedin"></li>
+                </ul>
+            </footer>
+        {% endblock %}
+
+        {% block javascripts %}
+            <script type="text/javascript" src="js/main.js"></script>
+            <script type="text/javascript" src="js/lightbox-plus-jquery.min.js"></script>
+            <!-- Lightbox created by Lokesh Dhakar.  https://lokeshdhakar.com/projects/lightbox2/ Lightbox2 is licensed under The MIT license 100% free.-->
+        {% endblock %}
+
+    </body>
+</html>
