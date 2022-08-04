@@ -1,8 +1,4 @@
-<VirtualHost *:80>
-
-    DocumentRoot /var/www/html/main/bsz_portfolio/bsz_portfolio/public
-
-    <Directory /var/www/html/main/bsz_portfolio/bsz_portfolio/public>
+<Directory /var/www/bsz_portfolio/public>
         AllowOverride None
 
         # Use the front controller as index file. It serves as a fallback solution when
@@ -74,5 +70,3 @@
 
 
       </Directory>
-
-</VirtualHost>

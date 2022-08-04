@@ -67,11 +67,11 @@
 
                                 {% if pro.id == pic.portfolio.id and pic.pictureOrder == 1 %}
 
-                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery{{ pro.id }}"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgP"></a>
+                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery{{ pic.portfolio.id }}"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgP"></a>
 
                                 {% elseif pic.pictureOrder != 1 %}
 
-                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery{{ pro.id }}"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgS"></a>
+                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery{{ pic.portfolio.id }}"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgS"></a>
                                     {% set index = index + 1 %}
 
                                 {% endif %}

@@ -71,13 +71,19 @@ class adminAddController extends AbstractController
             /* Creating an array of all files name */
             $picArray = $picFormData['pictures'];
 
+            /* Getting an id of project where picture belong*/
             $picProId = $picFormData['project']->getId();
 
+            /* Finding all pictures from entity with same portfolio id (means belong to the same project */
             $proPic = $porPicRepository->findBy(['portfolio' => $picProId]);
 
+            /* Variable that support foreach function bellow */
             $backup = 0;
+
+            /* Index variable will help to set the last picture order */
             $index = 1;
 
+            /* Foreach function will help to find the last integer of picture order and then in adding new pictures order of the pictures will be proper */
             foreach($proPic as $order){
                 $backup++;
                 $picOrder = $order->getPictureOrder();
@@ -86,9 +92,6 @@ class adminAddController extends AbstractController
                 }
             }
 
-
-
-/*            dd($high);*/
             /* Foreach loop executing process of changing file name, adding it to public/images folder and inserting all data to entity */
             foreach($picArray as $pic){
 

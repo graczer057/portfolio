@@ -21,16 +21,26 @@
                     <p><strong>Nazwa: </strong> {{ main.name }}</p>
                     <p><strong>Tytuł: </strong> {{ main.title }}</p>
 
+                </div>
+
+                <div class="porDelBut">
+                    <a href="{{ path('mainEdit', {'id': main.id}) }}"><img src="{{ asset('images/edit.png') }}" height="27" width="27"></a>
+                </div>
+
+                <div class="drpBut">
+                    <a id="dropdownButtonMain"><img src="{{ asset('images/down.png') }}" height="27" width="27"></a>
+                </div>
+
+            </div>
+
+            <div id="mainDropdown" class="dropdownContent">
+                <div class="picture">
+
                     <div class="data">
-                        <img src="images/{{ main.picture }}" height="250" width="250">
+                        <img src="{{ asset('images/'~main.picture) }}" height="250" width="250">
                     </div>
 
                 </div>
-
-                <div class="delBut">
-                    <a href="{{ path('mainEdit', {'id': main.id}) }}"><img src="images/close.png"></a>
-                </div>
-
             </div>
 
             {% set index = index + 1 %}
@@ -38,6 +48,21 @@
         {% endfor %}
 
     </div>
+
+    <script>
+
+        /* Creating variables with id's */
+        let button = document.getElementById("dropdownButtonMain");
+        let dropdown = document.getElementById("mainDropdown");
+
+        /* If elements exist, adding event listener */
+        if(button && dropdown){
+            button.addEventListener('click', () => {
+                dropdown.classList.toggle("show");
+            })
+        }
+
+    </script>
 
     <div class="aboutEdit">
 
@@ -58,8 +83,8 @@
 
                 </div>
 
-                <div class="delBut">
-                    <a href="{{ path('aboutEdit', {'id': about.id}) }}"><img src="images/close.png"></a>
+                <div class="porDelBut">
+                    <a href="{{ path('aboutEdit', {'id': about.id}) }}"><img src="{{ asset('images/edit.png') }}" height="27" width="27"></a>
                 </div>
 
             </div>
@@ -89,7 +114,7 @@
                 </div>
 
                 <div class="delBut">
-                    <a href="{{ path('skillEdit', {'id': skill.id}) }}"><img src="images/close.png"></a>
+                    <a href="{{ path('skillEdit', {'id': skill.id}) }}"><img src="{{ asset('images/edit.png') }}" height="27" width="27"></a>
                 </div>
 
             </div>
@@ -107,49 +132,90 @@
         </div>
 
         {% set index = 1 %}
-        {% for por in pors %}
+        {% for pro in pros %}
 
             <div class="skill">
 
                 <div class="data">
-                    <p><strong>Id: </strong> {{ por.id }}</p>
-                    <p><strong>Tytuł: </strong> {{ por.mainTitle }}</p>
-                    <p><strong>Link do strony: </strong> {{ por.worldLink }}</p>
-                    <p><strong>Link do githuba: </strong> {{ por.githubLink }}</p>
-                    <p><strong>Opis: </strong> {{ por.description }}</p>
-                    <p><strong>Stack: </strong> {{ por.stack }}</p>
+                    <p><strong>Id: </strong> {{ pro.id }}</p>
+                    <p><strong>Tytuł: </strong> {{ pro.mainTitle }}</p>
+                    <p><strong>Link do strony: </strong> {{ pro.worldLink }}</p>
+                    <p><strong>Link do githuba: </strong> {{ pro.githubLink }}</p>
+                    <p><strong>Opis: </strong> {{ pro.description }}</p>
+                    <p><strong>Stack: </strong> {{ pro.stack }}</p>
                 </div>
 
                 <div class="porDelBut">
-                    <a href="{{ path('porEdit', {'id': por.id}) }}"><img src="images/close.png"></a>
+                    <a href="{{ path('proEdit', {'id': pro.id}) }}"><img src="{{ asset('images/edit.png') }}" height="27" width="27"></a>
+                </div>
+
+                <div class="drpBut">
+                    <a id="dropdownButton{{ pro.id }}"><img src="{{ asset('images/down.png') }}" height="27" width="27"></a>
                 </div>
 
             </div>
 
-            {% set index = 1 %}
-            {% for pic in pics %}
+            <div id="dropdown{{ pro.id }}" class="dropdownContent">
+                {% set index = 1 %}
+                {% for pic in pics %}
 
-                {% if por.id == pic.portfolio.id %}
+                    {% if pro.id == pic.portfolio.id %}
 
-                    <div>
+                        <div class="picture">
 
-                        <div class="data">
-                            <img {% if pic.pictureOrder == 1 %}style="border: 3px solid yellow"{% endif%} src="images/{{ pic.picture }}" height="200" width="400">
+                            <div class="data">
+                                <img {% if pic.pictureOrder == 1 %}style="border: 3px solid yellow"{% endif%} src="{{ asset('images/'~pic.picture) }}" height="200" width="400">
+                            </div>
+
+                            <div class="porDelBut">
+                                {% if pic.pictureOrder != 1 %}<a href="{{ path('orderUp', {'id': pic.id}) }}"><img src="{{ asset('images/up.png') }}" height="27" width="27"></a>{%endif %}
+                                <a href="{{ path('orderDown', {'id': pic.id}) }}"><img src="{{ asset('images/down.png') }}" height="27" width="27"></a>
+                            </div>
+
                         </div>
 
-                    </div>
+                    {% endif %}
 
-                {% endif %}
+                    {% set index = index + 1 %}
+
+                {% endfor %}
 
                 {% set index = index + 1 %}
-
-            {% endfor %}
-
-            {% set index = index + 1 %}
-
+            </div>
         {% endfor %}
 
     </div>
+
+    <script>
+        /* Creating variable that counts existing elements with id */
+        let count = 0;
+
+        for(let i = 1; i <= 100; i++){
+
+            /* Creating variables with id's */
+            let button = document.getElementById("dropdownButton" + i);
+            let dropdown = document.getElementById("dropdown" + i);
+
+            /* Variable counting existing elements */
+            if(button){
+                count++;
+            }
+
+            /* If element exist, then recreating id of element and adding event listener */
+            if(dropdown){
+                button.removeAttribute('id');
+                button. setAttribute("id", "dropdownButton" + count);
+
+                dropdown.removeAttribute('id');
+                dropdown.setAttribute("id", "dropdown" + count);
+
+                button.addEventListener('click', () => {
+                    dropdown.classList.toggle("show");
+                })
+            }
+
+        }
+    </script>
 
     <div class="expEdit">
 
@@ -164,13 +230,14 @@
 
                 <div class="data">
                     <p><strong>Id: </strong> {{ exp.id }}</p>
+                    <p><strong>Kategoria: </strong> {% if exp.category == 1 %} Doświadczenie {% elseif exp.category == 2 %} Wykształcenie {% elseif exp.category == 3%} Certyfikaty {% else %} Projekty {% endif %}</p>
                     <p><strong>Tytuł: </strong> {{ exp.title }}</p>
                     <p><strong>Opis: </strong> {{ exp.description }}</p>
                     <p><strong>Data: </strong> {{ exp.date|date('d-M-Y') }}</p>
                 </div>
 
                 <div class="delBut">
-                    <a href="{{ path('expEdit', {'id': exp.id}) }}"><img src="images/close.png"></a>
+                    <a href="{{ path('expEdit', {'id': exp.id}) }}"><img src="{{ asset('images/edit.png') }}" height="27" width="27"></a>
                 </div>
 
             </div>

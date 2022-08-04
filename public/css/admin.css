@@ -138,6 +138,7 @@ li:hover{
     float: left;
     border-right: 3px solid #737373;
     border-bottom: 3px solid #737373;
+    overflow-y: auto;
 }
 
 .aboutEdit{
@@ -147,6 +148,7 @@ li:hover{
     float: left;
     border-right: 3px solid #737373;
     border-bottom: 3px solid #737373;
+    overflow-y: auto;
 }
 
 .skillsEdit{
@@ -155,6 +157,7 @@ li:hover{
     padding: 10px;
     float: left;
     border-bottom: 3px solid #737373;
+    overflow-y: auto;
 }
 
 .porEdit{
@@ -171,6 +174,7 @@ li:hover{
     height: 50%;
     padding: 10px;
     float: left;
+    overflow-y: auto;
 }
 
 main{

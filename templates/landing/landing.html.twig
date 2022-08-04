@@ -101,9 +101,9 @@
                             {% if pro.id == pic.portfolio.id%}
 
                                 {% if pic.pictureOrder == 1 %}
-                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery1"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgP"></a>
+                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery{{ pic.portfolio.id }}"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgP"></a>
                                 {% else %}
-                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery2"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgS"></a>
+                                    <a href="images/{{ pic.picture }}" data-lightbox="mygallery{{ pic.portfolio.id }}"><img src="images/{{ pic.picture }}" alt="Zdjęcie strony" class="mImgS"></a>
                                 {% endif %}
 
                                 {% set index = index + 1 %}
@@ -117,8 +117,8 @@
                     </div>
 
                     <div class="mL">
-                        <img src="images/earth.png" alt="link do strony" class="icon">{% if pro.worldLink is not null %} <a href="https://{{ pro.worldLink }}"><p class="link1">{{ pro.worldLink }}</p></a> {% else %} <a><p class="link1"> Strona nie została wystawiona</p></a> {% endif %}
-                        <img src="images/gh.png" alt="link do repozytorium" class="icon"><a href="https://{{ pro.githubLink }}"><p class="link2">{{ pro.githubLink }}</p></a>
+                        <img src="images/earth.png" alt="link do strony" class="icon">{% if pro.worldLink is not null %} <a href="{{ pro.worldLink }}"><p class="link1">{{ pro.worldLink }}</p></a> {% else %} <a><p class="link1"> Strona nie została wystawiona</p></a> {% endif %}
+                        <img src="images/gh.png" alt="link do repozytorium" class="icon"><a href="{{ pro.githubLink }}"><p class="link2">{{ pro.githubLink }}</p></a>
                     </div>
 
                     <div class="mC">

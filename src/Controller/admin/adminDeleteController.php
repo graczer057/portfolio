@@ -42,7 +42,7 @@ class adminDeleteController extends AbstractController
         $pro = $portfolioRepository->findOneBy(['id' => $proId]);
         $pic = $porPicRepository->findBy(['portfolio' => $proId]);
 
-        /* Checking if project is still existing in the entity */
+        /* Checking if project is existing in the entity */
         if(is_null($pro)){
             /* Rendering warning alert if it is true */
             $this->addFlash('warning', 'Sorry adminku, nie mamy takiego projektu :(');
@@ -77,6 +77,12 @@ class adminDeleteController extends AbstractController
         /* Variable containing an object */
         $pic = $porPicRepository->findOneBy(['id' => $picId]);
 
+
+        /* Checking if picture is still existing in the entity */
+        if(is_null($pic)){
+            $this->addFlash('warning', 'Sorry adminku, nie mamy takiego zdjęcia :(');
+        }
+
         /* Finding all picture linked to same portfolio project*/
         $picture = $pic->getPictureOrder();
         $id = $pic->getPortfolio()->getId();
@@ -110,16 +116,18 @@ class adminDeleteController extends AbstractController
         return $this->redirectToRoute('adminDelete');
     }
 
-    /**
-     * @Route("/admin/delete/skill/{skillId}", name="skillDelete")
-     */
+    /* Function responsible for deleting skill */
+    #[Route('/admin/delete/skill/{skillId}', name: 'skillDelete')]
     public function skillDelete(int $skillId, SkillsRepository $skillsRepository, EntityManagerInterface $entityManager){
+        /* Finding a specific row in entity by id */
         $skill = $skillsRepository->findOneBy(['id' => $skillId]);
 
+        /* Checking if skill is still existing in the entity */
         if(is_null($skill)){
             $this->addFlash('warning', 'Sorry adminku, nie mamy takiego skilla :(');
         }
 
+        /* Removing skill from entity and flushing */
         $entityManager->remove($skill);
         $entityManager->flush();
 
@@ -130,16 +138,18 @@ class adminDeleteController extends AbstractController
         return $this->redirectToRoute('adminDelete');
     }
 
-    /**
-     * @Route("/admin/delete/exp/{expId}", name="expDelete")
-     */
+    /* Function responsible for deleting experience */
+    #[Route('/admin/delete/exp/{expId}', name: 'expDelete')]
     public function expDelete(int $expId, ExpRepository $expRepository, EntityManagerInterface $entityManager){
+        /* Finding a specific row in entity by id */
         $exp = $expRepository->findOneBy(['id' => $expId]);
 
+        /* Checking if experience is still existing in the entity */
         if(is_null($exp)){
             $this->addFlash('warning', 'Sorry adminku, nie mamy takiego expa :(');
         }
 
+        /* Removing experience from entity and flushing */
         $entityManager->remove($exp);
         $entityManager->flush();
 

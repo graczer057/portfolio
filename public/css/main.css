@@ -398,6 +398,7 @@ section #portfolio{
     text-align: center;
     background-color: #626262;
     color: white;
+    text-transform: uppercase;
 }
 
 .more{
@@ -1035,7 +1036,7 @@ section #portfolio{
     .container.left .date,
     .container.right .date {
         right: auto;
-        left: 15px;
+        left: -35px;
     }
 
     .container.left .icon,
