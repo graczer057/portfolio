@@ -12,7 +12,7 @@
             <div class="main">
 
                 <div class="imageTitle">
-                    <img src="images/{{ main.picture }}" alt="Bartłomiej Szyszkowski - zdjęcie" class="me">
+                    <img src="{{ asset('images/Bartek.jpg') }}" alt="Bartłomiej Szyszkowski - zdjęcie" class="me">
                 </div>
 
                 <div class="titleH">
@@ -294,7 +294,7 @@
                         <div class="container left">
 
                             <div class="date">
-                                {{ exp.date|date('d M Y') }}
+                                {{ exp.date|date('d M Y') }} - 31 AUG 2020
                             </div>
 
                             <i class="icon fa fa-running"></i>

@@ -250,9 +250,9 @@ section .cards .text-card h3{
 }
 
 .me{
-    width: 35vh;
-    height: 35vh;
-    border-radius: 50%;
+    width: 250px;
+    height: auto;
+    border-radius: 10%;
 }
 
 .titleH{
@@ -791,7 +791,7 @@ section #portfolio{
 }
 
 .container.left .date {
-    right: -175px;
+    right: -300px;
 }
 
 .container.right .date {
@@ -1036,7 +1036,7 @@ section #portfolio{
     .container.left .date,
     .container.right .date {
         right: auto;
-        left: -35px;
+        left: -70px;
     }
 
     .container.left .icon,
